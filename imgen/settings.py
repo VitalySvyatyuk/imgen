@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-w#c@amg6=&wgfiz!ta!_e1n18)5^)jku1j+_qi+%!zmmri@zc)')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '*'
@@ -120,10 +120,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-#STATICFILES_DIRS = [
-#    BASE_DIR / 'static',
-#   '/imgen/static/',
-#]
+STATICFILES_DIRS = [
+   BASE_DIR / 'generator' / 'static',
+]
 STATIC_ROOT = 'static'
 
 MEDIA_URL = '/media/'
