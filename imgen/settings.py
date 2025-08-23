@@ -124,7 +124,7 @@ STATIC_URL = 'static/'
 #    BASE_DIR / 'static',
 #   '/imgen/static/',
 #]
-STATIC_ROOT = 'generator/static'
+STATIC_ROOT = 'static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
