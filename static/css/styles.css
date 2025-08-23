@@ -10831,7 +10831,7 @@ html {
 }
 
 .page-section {
-  padding: 6rem 0;
+  padding: 3rem 0;
 }
 .page-section .page-section-heading {
   font-size: 2.25rem;
@@ -11043,4 +11043,14 @@ html {
 
 .copyright {
   background-color: #1a252f;
+}
+
+#generateImage {
+  padding-top: 0;
+}
+
+@media (max-width: 650px) {
+  #tableFileName {
+    max-width: 150px;
+  }
 }

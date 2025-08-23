@@ -11,6 +11,16 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <link href="../static/css/styles.css" rel="stylesheet" />
+        {% if is_success %}
+            <script>
+                window.location.hash = "generatedImages";
+            </script>
+        {% endif %}
+        {% if is_error %}
+            <script>
+                window.location.hash = "generateImage";
+            </script>
+        {% endif %}
     </head>
     <body id="page-top">
         <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
@@ -42,58 +52,44 @@
                 <p class="masthead-subheading font-weight-light mb-0">designers or developers who need images </p>
                 <p class="masthead-subheading font-weight-light mb-0">with exact dimensions and size available online.</p>
             </div>
-            </div>
         </header>
         <section class="page-section" id="generatedImages">
             <div class="container">
                 <div class="row justify-content-center">
-                  <div class="col-lg-8 col-xl-7">
-                  <table class="table align-middle">
-                    <thead>
-                      <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Url</th>
-                        <th scope="col">Date</th>
-                        <th scope="col"></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row" style="background: rgb(34, 139, 230);"></th>
-                        <td>Mark some really long long long long long </td>
-                        <td>Otto</td>
-                        <td>
-                          <a class="btn btn-l btn-outline-light" href="https://startbootstrap.com/theme/freelancer/">
-                            <i class="fas fa-download me-2"></i>
-                            Download
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row" style="background: rgb(200, 139, 30);"></th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>
-                          <a class="btn btn-l btn-outline-light" href="https://startbootstrap.com/theme/freelancer/">
-                            <i class="fas fa-download me-2"></i>
-                            Download
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row" style="background: rgb(14, 139, 14);"></th>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>
-                          <a class="btn btn-l btn-outline-light" href="https://startbootstrap.com/theme/freelancer/">
-                            <i class="fas fa-download me-2"></i>
-                            Download
-                          </a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  </div>
+                    <div class="col-lg-8 col-xl-7">
+                        {% if is_success %}
+                            <div class="alert alert-warning" role="alert">
+                                New image generated: {{ message }}
+                            </div>
+                        {% endif %}
+                        <table class="table align-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Color</th>
+                                    <th scope="col">Url</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Download</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for im in images %}
+                                <tr>
+                                    <th scope="row" style="background: rgb({{ im.r }}, {{ im.g }}, {{ im.b }});"></th>
+                                    <td id="tableFileName" style="word-wrap: break-word; overflow-wrap: break-word;">
+                                        <a href="{{ im.url }}" target="_blank">{{ im.filename }}</a>
+                                    </td>
+                                    <td>{{ im.date }}</td>
+                                    <td>
+                                        <a class="btn btn-primary" href="{{ im.url }}" download>
+                                            <i class="fas fa-download me-2"></i>
+                                            Download
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>
@@ -101,23 +97,29 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-xl-7">
-                        <form id="contactForm">
+                        {% if is_error %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                        <form id="contactForm" method="post">
+                            {% csrf_token %}
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="width" type="number" placeholder="1024" value="1024" data-sb-validations="required" />
+                                <input class="form-control" id="width" name="width" type="number" placeholder="320" value="320" data-sb-validations="required" />
                                 <label for="width">Width in pixels</label>
                                 <div class="invalid-feedback" data-sb-feedback="width:required">Width required</div>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="height" type="number" placeholder="768" value="768" data-sb-validations="required" />
+                                <input class="form-control" id="height" name="height" type="number" placeholder="240" value="240" data-sb-validations="required" />
                                 <label for="height">Height in pixels</label>
                                 <div class="invalid-feedback" data-sb-feedback="height:required">Height required</div>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="size" type="number" placeholder="1000000" value="1000000" />
+                                <input class="form-control" id="size" name="size" type="number" placeholder="800000" value="800000" />
                                 <label for="size">Size in bytes</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="format" type="text" value='png' placeholder="png" />
+                                <input class="form-control" id="format" name="format" type="text" value='png' placeholder="png" />
                                 <label for="format">Format (png, jpg)</label>
                             </div>
                             <div class="d-none" id="submit">
@@ -144,8 +146,8 @@
                         <h4 class="text-uppercase mb-4">LInks</h4>
                         <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-telegram"></i></a>
                         <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-github"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href="https://www.linkedin.com/in/vitaliisviatiuk/"><i class="fab fa-fw fa-linkedin"></i></a>
+                        <a class="btn btn-outline-light btn-social mx-1" href="https://github.com/VitalySvyatyuk/imgen"><i class="fab fa-fw fa-github"></i></a>
                     </div>
                     <div class="col-lg-4">
                     </div>
