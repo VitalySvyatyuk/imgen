@@ -72,10 +72,11 @@ def serialize(width: int, height: int, size: int, format: str) -> (bool, str):
 async def index(request):
     is_success, is_error, message = False, False, ''
     if request.method == 'POST':
-        width = int(request.POST.get('width', 320))
-        height = int(request.POST.get('height', 240))
-        size = int(request.POST.get('size', 10))
-        format = request.POST.get('format', 'png')
+        post = request.POST
+        width = 320 if post.get('width') == '' else int(post.get('width'))
+        height = 240 if post.get('height') == '' else int(post.get('height'))
+        size = 80_000 if post.get('size') == '' else int(post.get('size'))
+        format = 'png' if post.get('format') == '' else post.get('format')
         is_serialized, error = await serialize(width, height, size, format)
         if is_serialized:
             is_success, is_error, message = await generate_image(width, height, size, format)
