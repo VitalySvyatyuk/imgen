@@ -11051,6 +11051,6 @@ html {
 
 @media (max-width: 650px) {
   #tableFileName {
-    max-width: 150px;
+    max-width: 90px;
   }
 }
