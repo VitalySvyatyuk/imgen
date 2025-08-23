@@ -1,13 +1,14 @@
-from django.shortcuts import render
-
 import io
 import os
 import random
-from PIL import Image
-from django.core.files.base import ContentFile
-from .models import GeneratedImage
-from asgiref.sync import sync_to_async
 from datetime import datetime
+
+from asgiref.sync import sync_to_async
+from django.core.files.base import ContentFile
+from django.shortcuts import render
+from PIL import Image
+
+from .models import GeneratedImage
 
 
 @sync_to_async
