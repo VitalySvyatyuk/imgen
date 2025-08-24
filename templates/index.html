@@ -75,7 +75,7 @@
                                     <td id="tableFileName" style="word-wrap: break-word; overflow-wrap: break-word;">
                                         <a href="{{ im.url }}" target="_blank">{{ im.filename }}</a>
                                     </td>
-                                    <td>{{ im.date }}</td>
+                                    <td><span data-dt="{{ im.date|date:'c' }}"></span></td>
                                     <td>
                                         <a class="btn btn-primary" href="{{ im.url }}" download>Download</a>
                                     </td>

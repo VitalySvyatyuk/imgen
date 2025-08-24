@@ -50,5 +50,23 @@ window.addEventListener('DOMContentLoaded', event => {
             }
         });
     });
+    let userLocale = navigator.language || "en-US";
+    document.querySelectorAll("[data-dt]").forEach(el => {
+        let utcDate = new Date(el.dataset.dt);
+        // detected tz from browser or provided by backend
+        let tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        // choose locale based on tz, fallback to English (UK style)
+        let formatter = new Intl.DateTimeFormat(userLocale, {
+            timeZone: tz,
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false
+        });
+        el.textContent = formatter.format(utcDate);
+    });
 
 });

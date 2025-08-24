@@ -1,7 +1,6 @@
 import io
 import os
 import random
-from datetime import datetime
 
 from asgiref.sync import sync_to_async
 from django.core.files.base import ContentFile
@@ -52,7 +51,7 @@ def get_images():
         'r': im.color.split('g')[0][1:],
         'g': im.color.split('g')[1].split('b')[0],
         'b': im.color.split('b')[-1],
-        'date': datetime.strftime(im.created_at, '%d.%m.%Y %H:%M:%S')
+        'date': im.created_at
     } for im in GeneratedImage.objects.filter().order_by('-created_at')[:10]]
 
 
