@@ -11054,3 +11054,9 @@ html {
     max-width: 90px;
   }
 }
+
+@media (min-width: 1200px) {
+  .masthead-subheading {
+    max-width: 77%;
+  }
+}

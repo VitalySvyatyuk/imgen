@@ -77,9 +77,7 @@
                                     </td>
                                     <td>{{ im.date }}</td>
                                     <td>
-                                        <a class="btn btn-primary" href="{{ im.url }}" download>
-                                            Download
-                                        </a>
+                                        <a class="btn btn-primary" href="{{ im.url }}" download>Download</a>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -101,14 +99,12 @@
                         <form id="contactForm" method="post">
                             {% csrf_token %}
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="width" name="width" type="number" placeholder="320" value="320" data-sb-validations="required" />
+                                <input class="form-control" id="width" name="width" type="number" placeholder="320" value="320" />
                                 <label for="width">Width in pixels</label>
-                                <div class="invalid-feedback" data-sb-feedback="width:required">Width required</div>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="height" name="height" type="number" placeholder="240" value="240" data-sb-validations="required" />
+                                <input class="form-control" id="height" name="height" type="number" placeholder="240" value="240" />
                                 <label for="height">Height in pixels</label>
-                                <div class="invalid-feedback" data-sb-feedback="height:required">Height required</div>
                             </div>
                             <div class="form-floating mb-3">
                                 <input class="form-control" id="size" name="size" type="number" placeholder="800000" value="800000" />
@@ -118,15 +114,6 @@
                                 <input class="form-control" id="format" name="format" type="text" value='png' placeholder="png" />
                                 <label for="format">Format (png, jpg)</label>
                             </div>
-                            <div class="d-none" id="submit">
-                                <div class="text-center mb-3">
-                                    <div class="fw-bolder">Image generated successfully!</div>
-                                    To activate this form, sign up at
-                                    <br />
-                                    <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                </div>
-                            </div>
-                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error generating image!</div></div>
                             <button class="btn btn-primary btn-xl" id="submitButton" type="submit">Generate Image</button>
                         </form>
                     </div>
