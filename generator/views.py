@@ -74,7 +74,7 @@ async def index(request):
         post = request.POST
         width = 320 if post.get('width') == '' else int(post.get('width'))
         height = 240 if post.get('height') == '' else int(post.get('height'))
-        size = 80_000 if post.get('size') == '' else int(post.get('size'))
+        size = 20_000 if post.get('size') == '' else int(post.get('size'))
         format = 'png' if post.get('format') == '' else post.get('format')
         is_serialized, error = await serialize(width, height, size, format)
         if is_serialized:
