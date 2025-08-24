@@ -11055,8 +11055,8 @@ html {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   .masthead-subheading {
-    max-width: 77%;
+    max-width: 720px;
   }
 }
