@@ -68,5 +68,17 @@ window.addEventListener('DOMContentLoaded', event => {
         });
         el.textContent = formatter.format(utcDate);
     });
+    document.getElementById("generateImageForm").addEventListener("submit", function(event) {
+        // disable 'generate' button to avoid repetitive clicking
+        const submitButton = document.getElementById("submitButton");
+        submitButton.disabled = true;
+        // move spinner a bit right
+        const spinner = document.getElementById("submitButtonSpinner");
+        spinner.style.display = "inline-block";
+        const spinnerStyle = window.getComputedStyle(spinner);
+        const spinnerLeft = parseFloat(spinnerStyle.left);
+        const newLeft = spinnerLeft + 50;
+        spinner.style.left = newLeft + "px";
+    });
 
 });

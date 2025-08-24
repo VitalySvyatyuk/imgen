@@ -96,7 +96,7 @@
                                 {{ message }}
                             </div>
                         {% endif %}
-                        <form id="contactForm" method="post">
+                        <form id="generateImageForm" method="post">
                             {% csrf_token %}
                             <div class="form-floating mb-3">
                                 <input class="form-control" id="width" name="width" type="number" placeholder="320" value="320" />
@@ -114,7 +114,12 @@
                                 <input class="form-control" id="format" name="format" type="text" value='png' placeholder="png" />
                                 <label for="format">Format (png, jpg)</label>
                             </div>
-                            <button class="btn btn-primary btn-xl" id="submitButton" type="submit">Generate Image</button>
+                            <button class="btn btn-primary btn-xl" id="submitButton" type="submit">
+                                <div id="submitButtonSpinner" class="spinner-border text-light position-absolute" role="status" style="display: none;">
+                                    <span class="sr-only"></span>
+                                </div>
+                                <span>Generate Image</span>
+                            </button>
                         </form>
                     </div>
                 </div>
